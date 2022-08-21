@@ -1,12 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
+
+const Stack = createNativeStackNavigator();
+//gobalScreenOptions is use to crete the style for the header of the screen can also do it in <Stack.Screen options={{ }} 
+const gobalScreenOptions= {
+  headerStyle : { backgroundColor: 'purple'},
+  headerTitleStyle: { color: "white" },
+  headerTintColor: "white"
+}
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={gobalScreenOptions}>
+      <Stack.Screen name='Login' component={LoginScreen} />
+      <Stack.Screen name='Register' component={RegisterScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+
   );
 }
 
