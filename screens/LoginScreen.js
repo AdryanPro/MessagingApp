@@ -6,8 +6,8 @@ import { StatusBar } from 'expo-status-bar'
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
     const signIn = () =>{}
-
   return (
     <KeyboardAvoidingView behavior='padding'  style={styles.container}>
         <StatusBar style="light" />
@@ -17,7 +17,7 @@ const LoginScreen = ({ navigation }) => {
         style={{width: 100, height: 100 }}
         />
         <View style={styles.inputContainer}>
-            <Input  placeholder='Email' autoFocus type="email"  value={email} onChangeText={(text) => setEmail(text)} />
+            <Input  placeholder='Email' type="email"  value={email} onChangeText={(text) => setEmail(text)} />
             <Input  placeholder='Password' secureTextEntry type="password" value={password} onChangeText={(text) => setPassword(text)} />
         </View>
         <Button containerStyle={styles.button} title="Login" onPress={signIn} />
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'gray'
+        backgroundColor: 'white'
     },
 
 });
