@@ -3,10 +3,10 @@ import { StatusBar } from "expo-status-bar";
 import React, { useLayoutEffect, useState } from 'react'
 import { Input , Text } from 'react-native-elements';
 import { Button } from '@rneui/themed';
+import { auth } from '../firebase';
 
 const RegisterScreen = ({ navigation }) => {
-  const [lastName, setLastName]= useState('');
-  const [firstName, setFirstName]= useState('');
+  const [username, setUsername]= useState('');
   const [email, setEmail]= useState('');
   const [password, setPassword]= useState('');
 
@@ -16,7 +16,17 @@ const RegisterScreen = ({ navigation }) => {
     })
   }, [navigation])
 
-  const register= () =>{}
+  const register= () =>{
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(authUser => {
+      authUser.user.updateProfile({
+        displayName: username,
+      });
+    })
+    .catch((error) => alert(error.message));
+  };
+
   return (
     <KeyboardAvoidingView behavior='padding' style={styles.container}>
       <StatusBar style='light' />
@@ -27,19 +37,15 @@ const RegisterScreen = ({ navigation }) => {
 
       <View style={styles.inputContainer}>
         <Input 
-          placeholder='First name'  type='text' value={firstName} onChangeText={(text) => setFirstName(text)}
+          placeholder='Enter your username'  type='text' value={username} onChangeText={(text) => setUsername(text)}
         />
 
         <Input 
-          placeholder='Last name'  type='text' value={lastName} onChangeText={(text) => setLastName(text)}
+          placeholder='Enter your Email'  type='text' value={email} onChangeText={(text) => setEmail(text)}
         />
 
         <Input 
-          placeholder='Email'  type='text' value={email} onChangeText={(text) => setEmail(text)}
-        />
-
-        <Input 
-          placeholder='Password' secureTextEntry  type='text' value={password} onChangeText={(text) => setPassword(text)} onSubmitEditing={register}
+          placeholder='Enter your Password' secureTextEntry  type='text' value={password} onChangeText={(text) => setPassword(text)} //onSubmitEditing={register}
         />
       </View>
 

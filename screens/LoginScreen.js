@@ -8,17 +8,19 @@ const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
-    useEffect(() =>{
+    useEffect( () => {
         const unsubscribe = auth.onAuthStateChanged((authUser) =>{
+            console.log(authUser);
             if(authUser){
-                navigation.replace('Home');
+                navigation.replace("Home");
             }
         });
 
         return unsubscribe;
     }, []);
 
-    const signIn = () =>{}
+    const signIn = () =>{};
+
   return (
     <KeyboardAvoidingView behavior='padding'  style={styles.container}>
         <StatusBar style="light" />
@@ -29,7 +31,7 @@ const LoginScreen = ({ navigation }) => {
         />
         <View style={styles.inputContainer}>
             <Input  placeholder='Email' type="email"  value={email} onChangeText={(text) => setEmail(text)} />
-            <Input  placeholder='Password' secureTextEntry type="password" value={password} onChangeText={(text) => setPassword(text)} />
+            <Input  placeholder='Password' type="password" secureTextEntry  value={password} onChangeText={(text) => setPassword(text)} />
         </View>
         <Button containerStyle={styles.button} title="Login" onPress={signIn} />
         <Button onPress={() => navigation.navigate('Register')} containerStyle={styles.button} title="Register" type='outline' />

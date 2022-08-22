@@ -1,7 +1,8 @@
-import * as firebase from "firebase";
-import  "firebase/auth";
-import  "firebase/firestore";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
+import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCHfcBjcOTFJbzjNP7UaGtAAYb2lMOm2YA",
@@ -9,18 +10,18 @@ const firebaseConfig = {
     projectId: "mymessaginapp-73979",
     storageBucket: "mymessaginapp-73979.appspot.com",
     messagingSenderId: "887843271775",
-    appId: "1:887843271775:web:aa945f7d2fc57ced2dd7ea"
+    appId: "1:887843271775:web:aa945f7d2fc57ced2dd7ea",
 };
 
 let app;
 
-if(firebase.apps.lenght === 0){
-    app = firebase.initializeApp(firebaseConfig);
+if (firebase.apps.length === 0) {
+  app = firebase.initializeApp(firebaseConfig)
 } else {
-    app = firebase.app();
+  app = firebase.app();
 }
 
 const db = app.firestore();
 const auth = firebase.auth();
 
-export { db, auth};
+export { db, auth };
