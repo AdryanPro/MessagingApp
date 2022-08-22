@@ -7,6 +7,7 @@ import { auth } from '../firebase';
 
 const RegisterScreen = ({ navigation }) => {
   const [username, setUsername]= useState('');
+  const [imageUri, setImageUri] = useState('');
   const [email, setEmail]= useState('');
   const [password, setPassword]= useState('');
 
@@ -22,6 +23,9 @@ const RegisterScreen = ({ navigation }) => {
       .then(authUser => {
       authUser.user.updateProfile({
         displayName: username,
+        photoURL:
+        imageUri ||
+        "https://toppng.com/uploads/preview/avatar-png-11554021730vd6yjirkxh.png",
       });
     })
     .catch((error) => alert(error.message));
@@ -42,6 +46,10 @@ const RegisterScreen = ({ navigation }) => {
 
         <Input 
           placeholder='Enter your Email'  type='text' value={email} onChangeText={(text) => setEmail(text)}
+        />
+
+        <Input 
+          placeholder='Enter your Profile Image'  type='text' value={imageUri} onChangeText={(text) => setImageUri(text)}
         />
 
         <Input 
